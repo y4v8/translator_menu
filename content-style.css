@@ -1,0 +1,79 @@
+.tm-base {
+  text-align: left;
+  box-sizing: border-box;
+  border-collapse: separate;
+  border-spacing: 0;
+  letter-spacing: 0;
+  line-height: normal;
+
+  font-family: serif;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  font-stretch: normal;
+  font-family: serif;
+}
+
+.tm-page {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+
+  align-content: center;
+  z-index: 99999;
+  pointer-events: none;
+  -moz-user-select: none;
+}
+
+.tm-main {
+  margin: 0 auto;
+  width: 400px;
+  position: relative;
+
+  pointer-events: auto;
+
+  border: 18px solid transparent;
+}
+
+.tm-menu {
+  color: #333;
+  background-color: #fff;
+  border: 2px solid #5bc0de;
+}
+
+.tm-menu-text {
+  border: 2px solid #77ca77;
+}
+
+.tm-menu-item {
+  cursor: pointer;
+}
+
+.tm-menu-item-selected {
+  background-color: #5bc0de;
+}
+
+.tm-menu-item-selected-text {
+  background-color: #77ca77;
+}
+
+.tm-menu-item-left {
+  font-size: 18px;
+
+  display: inline-block;
+  padding: 4px 4px 4px 8px;
+}
+
+.tm-menu-item-right {
+  font-size: 18px;
+
+  padding: 4px 8px 4px 4px;
+  float: right;
+}
+
+.tm-hotkey {
+  text-decoration: underline;
+  margin-right: 5px;
+}
