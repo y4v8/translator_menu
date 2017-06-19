@@ -3,7 +3,7 @@
 The menu for translation in a separate tab/window/monitor.  
 Currently for 'Google Translator', 'Microsoft Translator', 'Cambridge Dictionary'.
 
-![alt tag](https://github.com/y4v8/translator_menu/blob/master/screenshot.png)
+![screenshot](https://github.com/y4v8/translator_menu/blob/master/screenshot.png)
 
 To show the menu, do one of the following:
 - shortly press the 'Shift' key;

@@ -5,8 +5,7 @@
     translateAction = "translate",
     backAction = "back",
     dataAction = "data",
-    selectAction = "select",
-    initAction = "init";
+    selectAction = "select";
 
   const baseClass = "ytm-base",
     pageClass = "ytm-page",
@@ -42,7 +41,13 @@
     backSelect = 6,
     indexSelect = 7;
 
-  let portBS = chrome.runtime.connect({ name: portName });
+  const workItems = [
+    { reURL: /^https?:\/\/translate.google.com\/([?#]|$)/ },
+    { reURL: /^https?:\/\/dictionary.cambridge.org\// },
+    { reURL: /^https?:\/\/www.bing.com\/translator\// }
+  ];
+
+  const portBS = chrome.runtime.connect({ name: portName });
 
   class Menu {
     constructor() {
@@ -96,19 +101,15 @@
           }
 
           this.show();
-        } else if (m.action == initAction) {
-          this.init(m.workItems);
         }
       });
 
-      portBS.postMessage({
-        action: initAction
-      });
+      this.init();
 
       this.assignWindow(window);
     }
 
-    init(workItems) {
+    init() {
       document.body.appendChild(this.page);
 
       let items = [];

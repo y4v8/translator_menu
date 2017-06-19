@@ -5,16 +5,17 @@
     translateAction = "translate",
     backAction = "back",
     dataAction = "data",
-    selectAction = "select",
-    initAction = "init";
+    selectAction = "select";
 
-  let lastContentTabIDs = [];
-  let selectedIndex = 0;
-  let workItems = [
+  const workItems = [
     { tabIDs: [], reURL: /^https?:\/\/translate.google.com\/([?#]|$)/ },
     { tabIDs: [], reURL: /^https?:\/\/dictionary.cambridge.org\// },
     { tabIDs: [], reURL: /^https?:\/\/www.bing.com\/translator\// }
   ];
+
+  const lastContentTabIDs = [];
+
+  let selectedIndex = 0;
 
   function createTab(url, currentTab, callback) {
     chrome.tabs.create({
@@ -113,12 +114,6 @@
           break;
         case selectAction:
           selectedIndex = m.selectedIndex;
-          break;
-        case initAction:
-          portCS.postMessage({
-            action: initAction,
-            workItems: workItems
-          });
           break;
       }
     });
