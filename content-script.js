@@ -656,10 +656,6 @@
     constructor(name, hotkeys, actionName, action) {
       this.hotkeys = new Hotkeys(hotkeys);
       this.action = action;
-      this._actionName = "";
-      this._name = "";
-
-      this._firstHotkey = hotkeys.split(",")[0];
 
       this._visible = true;
       this._isSelected = false;
@@ -670,13 +666,20 @@
       this._left.classList.add(baseClass);
       this._left.classList.add(menuItemLeftClass);
 
-      this.name = name;
+      let hotkeyText = document.createElement("span");
+      hotkeyText.classList.add(menuHotkeyClass);
+      hotkeyText.textContent = hotkeys.split(",")[0];
+      this._left.appendChild(hotkeyText);
+
+      this._menuName = document.createTextNode(name);
+      this._left.appendChild(this._menuName);
 
       this._right = document.createElement("div");
       this._right.classList.add(baseClass);
       this._right.classList.add(menuItemRightClass);
 
-      this.actionName = actionName;
+      this._actionName = document.createTextNode(actionName);
+      this._right.appendChild(this._actionName);
 
       this.node = document.createElement("div");
       this.node.classList.add(baseClass);
@@ -736,24 +739,22 @@
     }
 
     get name() {
-      return this._name;
+      return this._menuName.textContent;
     }
 
     set name(value) {
-      if (this._name != value) {
-        this._name = value;
-        this._left.innerHTML = `<span class="${menuHotkeyClass}">${this._firstHotkey}</span>${this._name}`;
+      if (this._menuName.textContent != value) {
+        this._menuName.textContent = value;
       }
     }
 
     get actionName() {
-      return this._actionName;
+      return this._actionName.textContent;
     }
 
     set actionName(value) {
-      if (this._actionName != value) {
-        this._actionName = value;
-        this._right.innerHTML = this._actionName;
+      if (this._actionName.textContent != value) {
+        this._actionName.textContent = value;
       }
     }
   }
