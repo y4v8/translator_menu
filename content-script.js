@@ -61,6 +61,7 @@
       this.menuTimerID = null;
       this.borderTimerID = null;
       this.showTop = `-${paddingBottom}px`;
+      this.minWidth = 0;
 
       this.page = this.createPage();
       this.main = this.createMain();
@@ -351,7 +352,14 @@
     }
 
     setHideTop() {
-      this.hideTop = (paddingBottom - this.main.getBoundingClientRect().height) + "px";
+      let rect = this.main.getBoundingClientRect();
+      let width = Math.ceil(rect.width);
+      if (this.minWidth < width) {
+        this.minWidth = width;
+        this.main.style.minWidth = width + "px";
+      }
+
+      this.hideTop = (paddingBottom - rect.height) + "px";
       this.main.style.top = this.hideTop;
     }
 
