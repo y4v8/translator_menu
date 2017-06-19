@@ -1,4 +1,4 @@
-.tm-base {
+.ytm-base {
   box-sizing: border-box;
   border-collapse: separate;
   border-spacing: 0;
@@ -12,7 +12,7 @@
   font-stretch: normal;
 }
 
-.tm-page {
+.ytm-page {
   position: fixed;
   left: 0px;
   top: 0px;
@@ -25,7 +25,7 @@
   -moz-user-select: none;
 }
 
-.tm-main {
+.ytm-main {
   position: relative;
   display: inline-block;
   text-align: left;
@@ -35,36 +35,36 @@
   border: 18px solid transparent;
 }
 
-.tm-menu {
+.ytm-menu {
   color: #333;
   background-color: #fff;
   border: 2px solid #5bc0de;
 }
 
-.tm-menu-text {
+.ytm-menu-text {
   border: 2px solid #77ca77;
 }
 
-.tm-menu-item {
+.ytm-menu-item {
   cursor: pointer;
 }
 
-.tm-menu-item-selected {
+.ytm-menu-item-selected {
   background-color: #5bc0de;
 }
 
-.tm-menu-item-selected-text {
+.ytm-menu-item-selected-text {
   background-color: #77ca77;
 }
 
-.tm-menu-item-left {
+.ytm-menu-item-left {
   font-size: 18px;
 
   display: inline-block;
   padding: 4px 4px 4px 8px;
 }
 
-.tm-menu-item-right {
+.ytm-menu-item-right {
   font-size: 18px;
 
   padding: 4px 8px 4px 4px;
@@ -72,7 +72,7 @@
   margin-left: 25px;
 }
 
-.tm-hotkey {
+.ytm-hotkey {
   text-decoration: underline;
   margin-right: 5px;
 }

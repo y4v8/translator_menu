@@ -1,25 +1,25 @@
 "use strict";
 
 (function () {
-  const portName = "translate-port-2",
+  const portName = "ytm-translate-port",
     translateAction = "translate",
     backAction = "back",
     dataAction = "data",
     selectAction = "select",
     initAction = "init";
 
-  const baseClass = "tm-base",
-    pageClass = "tm-page",
-    mainClass = "tm-main",
-    mainTextClass = "tm-main-text",
-    menuClass = "tm-menu",
-    menuTextClass = "tm-menu-text",
-    menuItemClass = "tm-menu-item",
-    menuItemSelectedClass = "tm-menu-item-selected",
-    menuItemSelectedTextClass = "tm-menu-item-selected-text",
-    menuItemLeftClass = "tm-menu-item-left",
-    menuItemRightClass = "tm-menu-item-right",
-    menuHotkeyClass = "tm-hotkey";
+  const baseClass = "ytm-base",
+    pageClass = "ytm-page",
+    mainClass = "ytm-main",
+    mainTextClass = "ytm-main-text",
+    menuClass = "ytm-menu",
+    menuTextClass = "ytm-menu-text",
+    menuItemClass = "ytm-menu-item",
+    menuItemSelectedClass = "ytm-menu-item-selected",
+    menuItemSelectedTextClass = "ytm-menu-item-selected-text",
+    menuItemLeftClass = "ytm-menu-item-left",
+    menuItemRightClass = "ytm-menu-item-right",
+    menuHotkeyClass = "ytm-hotkey";
 
   const paddingBottom = 20,
     keyMaxDuration = 250,

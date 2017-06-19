@@ -1,7 +1,7 @@
 "use strict";
 
 (function () {
-  const portName = "translate-port-2",
+  const portName = "ytm-translate-port",
     translateAction = "translate",
     backAction = "back",
     dataAction = "data",
