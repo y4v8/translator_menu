@@ -142,7 +142,7 @@
 
   chrome.tabs.onUpdated.addListener((tabID, changeInfo, tab) => {
     if ('url' in changeInfo) {
-      appendTab(tab);
+      updateTab(tab);
     }
   });
 
@@ -179,6 +179,21 @@
         if (item.tabIDs.findIndex(o => o == tab.id) == -1) {
           item.tabIDs.push(tab.id);
         }
+      }
+    }
+  }
+
+  function updateTab(tab) {
+    for (let item of workItems) {
+      let test = item.reURL.test(tab.url);
+      let exists = item.tabIDs.findIndex(o => o == tab.id) != -1;
+      
+      if (test && exists == false) {
+        item.tabIDs.push(tab.id);
+        break;
+      } else if (exists && test == false) {
+        removeTab(tab.id);
+        break;
       }
     }
   }
