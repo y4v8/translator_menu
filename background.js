@@ -121,30 +121,28 @@
 
   chrome.runtime.onConnect.addListener(connected);
 
-  chrome.tabs.onRemoved.addListener((tabId, removeInfo) => {
-    let i = 0, p = 0;
-    while (i < lastContentTabIDs.length) {
-      if (p != i) {
-        lastContentTabIDs[p] = lastContentTabIDs[i];
-      }
-      if (lastContentTabIDs[i] != tabId) {
-        p++;
-      }
-      i++;
-    }
-
-    if (p != i) {
-      lastContentTabIDs.length = p;
-    }
-
-    removeTab(tabId);
-  });
-
-  chrome.tabs.onUpdated.addListener((tabID, changeInfo, tab) => {
+  chrome.tabs.onUpdated.addListener(updated);
+  
+  function updated(tabID, changeInfo, tab) {
     if ('url' in changeInfo) {
       updateTab(tab);
     }
-  });
+  }
+
+  function updateTab(tab) {
+    for (let item of workItems) {
+      let test = item.reURL.test(tab.url);
+      let exists = item.tabIDs.indexOf(tab.id) != -1;
+      
+      if (test && exists == false) {
+        item.tabIDs.push(tab.id);
+        break;
+      } else if (exists && test == false) {
+        removeTab(tab.id);
+        break;
+      }
+    }
+  }
 
   chrome.windows.getAll({ populate: true }, windows => {
     for (let window of windows) {
@@ -154,9 +152,34 @@
     }
   });
 
-  function removeTab(tabId) {
+  function appendTab(tab) {
     for (let item of workItems) {
-      let i = 0, p = 0;
+      if (item.reURL.test(tab.url) && item.tabIDs.indexOf(tab.id) == -1) {
+        item.tabIDs.push(tab.id);
+      }
+    }
+  }
+
+  chrome.tabs.onRemoved.addListener(removeTab);
+
+  function removeTab(tabId) {
+    let i = 0, p = 0;
+
+    while (i < lastContentTabIDs.length) {
+      if (p != i) {
+        lastContentTabIDs[p] = lastContentTabIDs[i];
+      }
+      if (lastContentTabIDs[i] != tabId) {
+        p++;
+      }
+      i++;
+    }
+    if (p != i) {
+      lastContentTabIDs.length = p;
+    }
+
+    for (let item of workItems) {
+      i = 0, p = 0;
       while (i < item.tabIDs.length) {
         if (p != i) {
           item.tabIDs[p] = item.tabIDs[i];
@@ -166,33 +189,21 @@
         }
         i++;
       }
-
       if (p != i) {
         item.tabIDs.length = p;
       }
     }
   }
 
-  function appendTab(tab) {
-    for (let item of workItems) {
-      if (item.reURL.test(tab.url)) {
-        if (item.tabIDs.findIndex(o => o == tab.id) == -1) {
-          item.tabIDs.push(tab.id);
-        }
-      }
-    }
-  }
+  chrome.tabs.onReplaced.addListener(replaced);
 
-  function updateTab(tab) {
+  function replaced(addedTabId, removedTabId) {
     for (let item of workItems) {
-      let test = item.reURL.test(tab.url);
-      let exists = item.tabIDs.findIndex(o => o == tab.id) != -1;
-      
-      if (test && exists == false) {
-        item.tabIDs.push(tab.id);
-        break;
-      } else if (exists && test == false) {
-        removeTab(tab.id);
+      if (item.tabIDs.indexOf(removedTabId) != -1) {
+        removeTab(removedTabId);
+        chrome.tabs.get(addedTabId, tab => {
+          appendTab(tab);
+        });
         break;
       }
     }
