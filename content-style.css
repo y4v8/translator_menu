@@ -1,15 +1,15 @@
 .ytm-base {
-  box-sizing: border-box;
-  border-collapse: separate;
-  border-spacing: 0;
-  letter-spacing: 0;
-  line-height: normal;
+  box-sizing: border-box !important;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  letter-spacing: 0 !important;
+  line-height: 1 !important;
 
-  font-family: serif;
-  font-style: normal;
-  font-variant: normal;
-  font-weight: normal;
-  font-stretch: normal;
+  font-family: serif !important;
+  font-style: normal !important;
+  font-variant: normal !important;
+  font-weight: normal !important;
+  font-stretch: normal !important;
 }
 
 .ytm-page {
@@ -46,6 +46,7 @@
 }
 
 .ytm-menu-item {
+  padding: 2px 0;
   cursor: pointer;
 }
 

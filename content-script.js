@@ -667,6 +667,7 @@
       this._left.classList.add(menuItemLeftClass);
 
       let hotkeyText = document.createElement("span");
+      hotkeyText.classList.add(baseClass);
       hotkeyText.classList.add(menuHotkeyClass);
       hotkeyText.textContent = hotkeys.split(",")[0];
       this._left.appendChild(hotkeyText);
