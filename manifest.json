@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Translator menu",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "The menu for translation in a separate tab/window/monitor.",
   "homepage_url": "https://github.com/y4v8/translator_menu",
 

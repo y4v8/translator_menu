@@ -110,6 +110,7 @@
           });
           break;
         case translateAction:
+          selectedIndex = m.index;
           postMessage(m);
           break;
         case selectAction:

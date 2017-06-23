@@ -130,6 +130,7 @@
             port: portBS,
             index: i
           });
+          this.visible = false;
         });
 
         if (workItems[i].reURL.test(document.URL)) {
