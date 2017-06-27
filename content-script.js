@@ -519,7 +519,7 @@
             run = true;
           } else {
             for (let i = 0; i < this.items.length; i++) {
-              if (this.items[i].hotkeys.equals(event)) {
+              if (this.items[i].visible && this.items[i].hotkeys.equals(event)) {
                 selected = i;
                 run = true;
                 break;
@@ -571,6 +571,7 @@
 
         if (this.visible) {
           e.preventDefault();
+          e.stopPropagation();
 
           if (e.code == "Escape") {
             this.visible = false;
@@ -588,7 +589,7 @@
             this.selectItem(keySelect, e);
           }
         }
-      });
+      }, true);
 
       win.addEventListener("keyup", e => {
         this.menuKeyUp(e);
