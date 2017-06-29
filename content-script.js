@@ -33,6 +33,8 @@
     waitFrames = 25,
     fps = 25;
 
+  const lastIndex = 4;
+
   const firstSelect = 1,
     lastSelect = 2,
     prevSelect = 3,
@@ -46,6 +48,7 @@
     { reURL: /^https?:\/\/dictionary.cambridge.org\// },
     { reURL: /^https?:\/\/www.bing.com\/translator\// }
   ];
+  let workIndex = 0;
 
   const portBS = chrome.runtime.connect({ name: portName });
 
@@ -90,6 +93,7 @@
 
           this.setHideTop();
 
+          workIndex = m.workIndex;
           this.selectItem(indexSelect, { index: m.selectedIndex });
 
           for (let i = 0; i < m.workItems.length; i++) {
@@ -106,7 +110,9 @@
 
       this.init();
 
-      this.assignWindow(window);
+      if (lastIndex == this.items.length - 1) {
+        this.assignWindow(window);
+      }
     }
 
     init() {
@@ -317,7 +323,7 @@
 
     addMenuItem(name, hotkeys, actionName, action) {
       let number = this.items.length + 1;
-      let allHotkeys = number + "," + hotkeys + ",ArrowRight,Space,Enter";
+      let allHotkeys = number + "," + hotkeys + ",ArrowRight,Space,Enter,Control";
       let menuItem = new MenuItem(name, allHotkeys, actionName, action);
       this.items.push(menuItem);
       this.menu.appendChild(menuItem.node);
@@ -494,7 +500,11 @@
 
       switch (select) {
         case indexSelect:
-          selected = event.index;
+          if (event.index == lastIndex && this.items[this.items.length - 1].visible) {
+            selected = this.items.length - 1;
+          } else {
+            selected = event.index;
+          }
           break
         case firstSelect:
           selected = first;
@@ -530,7 +540,7 @@
       }
 
       if (this.items[selected].visible == false) {
-        selected = 0;
+        selected = workIndex;
       }
 
       this.items[selected].isSelected = true;
@@ -575,7 +585,7 @@
 
           if (e.code == "Escape") {
             this.visible = false;
-          } else if (e.code == "ControlLeft" || e.code == "ControlRight" || e.code == "Backquote" || e.code == "Backspace" || e.code == "ArrowLeft") {
+          } else if (e.code == "Backquote" || e.code == "Backspace" || e.code == "ArrowLeft") {
             this.selectItem(backSelect);
           } else if (e.code == "Home") {
             this.selectItem(firstSelect);

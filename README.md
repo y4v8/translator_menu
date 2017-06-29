@@ -21,10 +21,10 @@ To select a menu item, do one of the following:
 - scroll wheel mouse.
 
 To execute a menu item, do one of the following:
-- press one of the keys 'Space','Enter','ArrowRight';
+- press one of the keys 'Space','Enter','ArrowRight','Control';
 - click the middle button (with the wheel) of the mouse;
 - press the appropriate hotkey ('1','2','3'...).
 
 To return to previous page, do one of the following:
-- press one of the keys 'ArrowLeft','Backspace','Backquote','Ctrl';
+- press one of the keys 'ArrowLeft','Backspace','Backquote';
 - execute the appropriate menu item.

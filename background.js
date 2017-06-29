@@ -6,6 +6,8 @@
     backAction = "back",
     dataAction = "data",
     selectAction = "select";
+  
+  const lastIndex = 4;
 
   const workItems = [
     { tabIDs: [], reURL: /^https?:\/\/translate.google.com\/([?#]|$)/ },
@@ -15,6 +17,7 @@
 
   const lastContentTabIDs = [];
 
+  let workIndex = 0;
   let selectedIndex = 0;
 
   function createTab(url, currentTab, callback) {
@@ -106,11 +109,17 @@
             action: dataAction,
             countPreviousPages: lastContentTabIDs.length,
             workItems: workItems.map(o => o.tabIDs.length),
-            selectedIndex: selectedIndex
+            selectedIndex: selectedIndex,
+            workIndex: workIndex
           });
           break;
         case translateAction:
-          selectedIndex = m.index;
+          if (m.index < workItems.length) {
+            workIndex = m.index;
+            selectedIndex = lastIndex;
+          } else {
+            selectedIndex = m.index;
+          }
           postMessage(m);
           break;
         case selectAction:
