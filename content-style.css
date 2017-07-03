@@ -10,6 +10,10 @@
   font-variant: normal !important;
   font-weight: normal !important;
   font-stretch: normal !important;
+  font-size: 18px !important;
+  color: #000 !important;
+
+  text-align: left !important;
 }
 
 .ytm-page {
@@ -19,7 +23,7 @@
   width: 100%;
   height: 100%;
 
-  text-align: center;
+  text-align: center !important;
   z-index: 2147483647;
   pointer-events: none;
   -moz-user-select: none;
@@ -28,7 +32,6 @@
 .ytm-main {
   position: relative;
   display: inline-block;
-  text-align: left;
 
   pointer-events: auto;
 
@@ -59,15 +62,11 @@
 }
 
 .ytm-menu-item-left {
-  font-size: 18px;
-
   display: inline-block;
   padding: 4px 4px 4px 8px;
 }
 
 .ytm-menu-item-right {
-  font-size: 18px;
-
   padding: 4px 8px 4px 4px;
   float: right;
   margin-left: 25px;
