@@ -11,7 +11,7 @@ To show the menu, do one of the following:
 - hover over the menu border and move it down.
 
 To hide the menu, do one of the following:
-- press the 'Shift' key or the 'Escape' key;
+- press the 'Escape' key or the 'Control' key;
 - click on the menu border or out of the menu;
 - leave the menu.
 
@@ -21,7 +21,7 @@ To select a menu item, do one of the following:
 - scroll wheel mouse.
 
 To execute a menu item, do one of the following:
-- press one of the keys 'Space','Enter','ArrowRight','Control';
+- press one of the keys 'Shift','Space','Enter','ArrowRight';
 - click the middle button (with the wheel) of the mouse;
 - press the appropriate hotkey ('1','2','3'...).
 

@@ -323,7 +323,7 @@
 
     addMenuItem(name, hotkeys, actionName, action) {
       let number = this.items.length + 1;
-      let allHotkeys = number + "," + hotkeys + ",ArrowRight,Space,Enter,Control";
+      let allHotkeys = number + "," + hotkeys + ",ArrowRight,Space,Enter,Shift";
       let menuItem = new MenuItem(name, allHotkeys, actionName, action);
       this.items.push(menuItem);
       this.menu.appendChild(menuItem.node);
@@ -547,6 +547,7 @@
 
       if (run) {
         this.items[selected].action();
+        this.visible = false;
       }
     }
 
@@ -572,7 +573,7 @@
         return;
       }
 
-      this.visible = !this.visible;
+      this.visible = true;
     }
 
     assignWindow(win) {
@@ -580,10 +581,11 @@
         this.menuKeyDown(e);
 
         if (this.visible) {
+          this.keyMenuDown = false;
           e.preventDefault();
           e.stopPropagation();
 
-          if (e.code == "Escape") {
+          if (e.code == "Escape" || e.code == "ControlLeft" || e.code == "ControlRight") {
             this.visible = false;
           } else if (e.code == "Backquote" || e.code == "Backspace" || e.code == "ArrowLeft") {
             this.selectItem(backSelect);
