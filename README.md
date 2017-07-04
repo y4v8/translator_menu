@@ -47,3 +47,15 @@ To return to previous page, do one of the following:
 
 * press one of the keys 'ArrowLeft','Backspace','Backquote';
 * execute the appropriate menu item.
+
+## Known issues
+
+The extension does not work on the following sites:
+
+* addons.mozilla.org (for security reasons);
+* docs.google.com and sites similar to it (there is no possibility to get the selected text).
+
+The menu item 'Microsoft Translator - Speaking English' may not work:
+
+* if you have not visited this site before;
+* if it is blocked by another extension, for example 'NoScript'.
