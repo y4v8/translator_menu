@@ -12,7 +12,7 @@
   const workItems = [
     { tabIDs: [], reURL: /^https?:\/\/translate.google.com\/([?#]|$)/ },
     { tabIDs: [], reURL: /^https?:\/\/dictionary.cambridge.org\// },
-    { tabIDs: [], reURL: /^https?:\/\/www.bing.com\/translator\// }
+    { tabIDs: [], reURL: /^https?:\/\/www.bing.com\/translator\/?/ }
   ];
 
   const lastContentTabIDs = [];

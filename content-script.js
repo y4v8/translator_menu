@@ -46,7 +46,7 @@
   const workItems = [
     { reURL: /^https?:\/\/translate.google.com\/([?#]|$)/ },
     { reURL: /^https?:\/\/dictionary.cambridge.org\// },
-    { reURL: /^https?:\/\/www.bing.com\/translator\// }
+    { reURL: /^https?:\/\/www.bing.com\/translator\/?/ }
   ];
   let workIndex = 0;
 
@@ -629,7 +629,7 @@
      let observer = new MutationObserver((mutations) => {
         mutations.forEach((mutation) => {
           mutation.addedNodes.forEach((node) => {
-            if (node.tagName == 'IFRAME') {
+            if (node.tagName == 'IFRAME' && node.contentWindow) {
               node.contentWindow.addEventListener("load", e => {
                 this.assignWindow(node.contentWindow);
               });
