@@ -1,12 +1,12 @@
 "use strict";
 
-(function () {
+(function() {
   const portName = "ytm-translate-port",
     translateAction = "translate",
     backAction = "back",
     dataAction = "data",
     selectAction = "select";
-  
+
   const lastIndex = 4;
 
   const workItems = [
@@ -47,7 +47,7 @@
   }
 
   function callback(m) {
-    return function (tabs) {
+    return function(tabs) {
       let tab = Array.isArray(tabs) ? tabs[0] : tabs;
       chrome.windows.update(tab.windowId, {
         focused: true
@@ -105,25 +105,31 @@
           }
           break;
         case dataAction:
-          portCS.postMessage({
-            action: dataAction,
-            countPreviousPages: lastContentTabIDs.length,
-            workItems: workItems.map(o => o.tabIDs.length),
-            selectedIndex: selectedIndex,
-            workIndex: workIndex
+          chrome.tabs.query({
+            active: true
+          }, activeTabs => {
+            if (activeTabs.length == 0) {
+              return;
+            }
+
+            portCS.postMessage({
+              action: dataAction,
+              countPreviousPages: lastContentTabIDs.length,
+              workItems: workItems.map(o => o.tabIDs.length),
+              selectedIndex: isWorkTab(activeTabs[0]) ? lastIndex : selectedIndex,
+              workIndex: workIndex
+            });
           });
           break;
         case translateAction:
-          if (m.index < workItems.length) {
-            workIndex = m.index;
-            selectedIndex = lastIndex;
-          } else {
-            selectedIndex = m.index;
+          selectedIndex = m.index;
+          if (selectedIndex < workItems.length) {
+            workIndex = selectedIndex;
           }
           postMessage(m);
           break;
         case selectAction:
-          selectedIndex = m.selectedIndex;
+          selectedIndex = m.index;
           break;
       }
     });
@@ -132,7 +138,7 @@
   chrome.runtime.onConnect.addListener(connected);
 
   chrome.tabs.onUpdated.addListener(updated);
-  
+
   function updated(tabID, changeInfo, tab) {
     if ('url' in changeInfo) {
       updateTab(tab);
@@ -143,7 +149,7 @@
     for (let item of workItems) {
       let test = item.reURL.test(tab.url);
       let exists = item.tabIDs.indexOf(tab.id) != -1;
-      
+
       if (test && exists == false) {
         item.tabIDs.push(tab.id);
         break;
@@ -173,7 +179,8 @@
   chrome.tabs.onRemoved.addListener(removeTab);
 
   function removeTab(tabId) {
-    let i = 0, p = 0;
+    let i = 0,
+      p = 0;
 
     while (i < lastContentTabIDs.length) {
       if (p != i) {

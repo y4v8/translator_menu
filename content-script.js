@@ -1,6 +1,6 @@
 "use strict";
 
-(function () {
+(function() {
   const portName = "ytm-translate-port",
     translateAction = "translate",
     backAction = "back",
@@ -144,7 +144,12 @@
         }
       }
 
+      let speakIndex = workItems.length;
       this.addMenuItem("Microsoft Translator", "", "Speak English", () => {
+        portBS.postMessage({
+          action: selectAction,
+          index: speakIndex
+        });
         if (this.isTextSelected) {
           this.audioFrame.src =
             "https://www.bing.com/translator/api/language/Speak?locale=en-US&gender=male&media=audio/mp3&text=" +
@@ -338,10 +343,6 @@
             } else {
               item.node.classList.add(menuItemSelectedClass);
             }
-            portBS.postMessage({
-              action: selectAction,
-              selectedIndex: i
-            });
           } else if (item.isSelected) {
             item.isSelected = false;
             item.node.classList.remove(menuItemSelectedClass);
@@ -468,7 +469,11 @@
         return;
       }
 
-      let selected = -1, first = -1, last = -1, prev = -1, next = -1;
+      let selected = -1,
+        first = -1,
+        last = -1,
+        prev = -1,
+        next = -1;
       for (let i = 0; i < this.items.length; i++) {
         if (this.items[i].isSelected) {
           selected = i;
@@ -626,7 +631,7 @@
         this.isFocused = false;
       }, true);
 
-     let observer = new MutationObserver((mutations) => {
+      let observer = new MutationObserver((mutations) => {
         mutations.forEach((mutation) => {
           mutation.addedNodes.forEach((node) => {
             if (node.tagName == 'IFRAME' && node.contentWindow) {
@@ -812,13 +817,17 @@
       for (let key of keys) {
         switch (key) {
           case "Alt":
-            this.altKey = true; break;
+            this.altKey = true;
+            break;
           case "Control":
-            this.ctrlKey = true; break;
+            this.ctrlKey = true;
+            break;
           case "Meta":
-            this.metaKey = true; break;
+            this.metaKey = true;
+            break;
           case "Shift":
-            this.shiftKey = true; break;
+            this.shiftKey = true;
+            break;
           default:
             this.code = key;
             this.key = key.toUpperCase();
@@ -884,7 +893,7 @@
 
         let content = '';
 
-        let obs = new MutationObserver(function (mutations) {
+        let obs = new MutationObserver(function(mutations) {
           if (menu.style.display == '' && source.value == content) {
             let focus = document.activeElement == source;
             source.focus();
@@ -896,7 +905,7 @@
         });
         obs.observe(menu, { attributes: true, attributeFilter: ['style'] });
 
-        chrome.runtime.onMessage.addListener(function (msg, sender, resp) {
+        chrome.runtime.onMessage.addListener(function(msg, sender, resp) {
           let id = 'extensionId' in sender ? sender.extensionId : sender.id;
           if (id != chrome.runtime.id) {
             return;
@@ -951,7 +960,7 @@
           searchInput.value = "";
         });
 
-        chrome.runtime.onMessage.addListener(function (msg, sender, resp) {
+        chrome.runtime.onMessage.addListener(function(msg, sender, resp) {
           let id = 'extensionId' in sender ? sender.extensionId : sender.id;
           if (id != chrome.runtime.id) {
             return;
@@ -1007,7 +1016,7 @@
           srcText.value = "";
         });
 
-        chrome.runtime.onMessage.addListener(function (msg, sender, resp) {
+        chrome.runtime.onMessage.addListener(function(msg, sender, resp) {
           let id = 'extensionId' in sender ? sender.extensionId : sender.id;
           if (id != chrome.runtime.id) {
             return;
