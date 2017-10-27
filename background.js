@@ -105,19 +105,22 @@
           }
           break;
         case dataAction:
-          chrome.tabs.query({
-            active: true
-          }, activeTabs => {
-            if (activeTabs.length == 0) {
-              return;
-            }
+          chrome.windows.getCurrent(currentWindow => {
+            chrome.tabs.query({
+              windowId: currentWindow.id,
+              active: true
+            }, activeTabs => {
+              if (activeTabs.length == 0) {
+                return;
+              }
 
-            portCS.postMessage({
-              action: dataAction,
-              countPreviousPages: lastContentTabIDs.length,
-              workItems: workItems.map(o => o.tabIDs.length),
-              selectedIndex: isWorkTab(activeTabs[0]) ? lastIndex : selectedIndex,
-              workIndex: workIndex
+              portCS.postMessage({
+                action: dataAction,
+                countPreviousPages: lastContentTabIDs.length,
+                workItems: workItems.map(o => o.tabIDs.length),
+                selectedIndex: isWorkTab(activeTabs[0]) ? lastIndex : selectedIndex,
+                workIndex: workIndex
+              });
             });
           });
           break;
