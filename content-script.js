@@ -78,6 +78,8 @@
       this.main.appendChild(this.menu);
       this.page.appendChild(this.main);
 
+      this.main.style.top = "-1000px";
+
       this.audioFrame = document.createElement("IFRAME");
       this.audioFrame.style.display = "none";
       this.page.appendChild(this.audioFrame);
@@ -160,6 +162,8 @@
       this.addMenuItem("Previous page", "", "Open", () => {
         this.selectItem(backSelect);
       });
+
+      setTimeout(() => this.setHideTop(), 200);
     }
 
     preShow() {
@@ -356,8 +360,6 @@
           this.selectItem(firstSelect);
         }
       };
-
-      this.setHideTop();
     }
 
     setHideTop() {
