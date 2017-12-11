@@ -37,7 +37,7 @@
         callback(tab);
       } else if (tab.index == currentTab.index + 1) {
         callback(tab);
-      } else if (tab.pinned) {
+      } else if (tab.pinned || currentTab.pinned) {
         callback(tab);
       } else {
         let index = tab.index < currentTab.index ? currentTab.index : currentTab.index + 1;
