@@ -154,7 +154,7 @@
         });
         if (this.isTextSelected) {
           this.audioFrame.src =
-            "https://www.bing.com/translator/api/language/Speak?locale=en-US&gender=male&media=audio/mp3&text=" +
+            "https://www.bing.com/tspeak?&format=audio%2Fmp3&language=en-US&options=female&text=" +
             encodeURIComponent(this.getSelectedText());
         }
       });
@@ -987,8 +987,7 @@
     const name = "Microsoft Translator",
       action = "Open",
       url = "https://www.bing.com/translator/",
-      srcTextID = "srcText",
-      translateButtonID = "TranslateButton";
+      srcTextID = "t_sv";
 
     class Helper {
       constructor() {
@@ -1008,9 +1007,8 @@
 
       init() {
         let srcText = document.getElementById(srcTextID);
-        let translateButton = document.getElementById(translateButtonID);
 
-        if (srcText == undefined || translateButton == undefined) {
+        if (srcText == undefined) {
           return;
         }
 
@@ -1028,9 +1026,6 @@
             srcText.value = msg.content;
           }
           srcText.focus();
-          if (msg.content != '') {
-            translateButton.click();
-          }
         });
       }
     }
